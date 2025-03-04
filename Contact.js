@@ -62,27 +62,60 @@ class Contact {
         console.log(`Address: ${this.#address}, ${this.#city}, ${this.#state} - ${this.#zip}`);
         console.log(`Phone: ${this.#phoneNumber}, Email: ${this.#email}`);
     }
+
+    getDetails() {
+        return `        Name: ${this.#firstName} ${this.#lastName}, 
+        Address: ${this.#address}, ${this.#city}, ${this.#state}, 
+        Zip: ${this.#zip}, 
+        Phone: ${this.#phoneNumber}, Email: ${this.#email} 
+        ::::::::::::::::::::::::::::::::::::::::`;
+    }
+       
+}
+
+
+class AddressBook{
+    #contacts=[];
+
+    addcontact(conntact){
+        this.#contacts.push(conntact);
+    }
+
+    displayContacts(){
+        if(this.#contacts.length ==0){
+            console.log("Address Book is empty");
+        }else{
+            console.log("Address Book Contacts :");
+            this.#contacts.forEach(contact =>console.log(contact.getDetails()));
+        }
+    }
 }
 
 
 try {
-    let contact2 = new Contact("John", "Doe", "123 Street", "New York", "Bhopal", "100001", "9876543210", "john.doe@example.com");
+    let addressBook =new AddressBook();
+    let contact1 = new Contact("John", "Doe", "123 Street", "New York", "Bhopal", "100001", "9876543210", "john.doe@example.com");
+    let contact2 = new Contact("Alice", "Smith", "456 Elm St", "Los Angeles", "Canda", "900002", "9876543210", "alice.smith@example.com");
+
+    addressBook.addcontact(contact1);
+    addressBook.addcontact(contact2);
+    addressBook.displayContacts();
+
+} catch (error) {
+    console.error(error.message);
+}
+
+try {
+    let invalidContact = new Contact("Jo", "Doe", "12", "NY", "NY", "12345", "98543210", "john.doe@");
     contact2.displayContact();
 } catch (error) {
     console.error(error.message);
 }
 
-try {
-    let contact2 = new Contact("John", "Doe", "123 Street", "New York", "NY", "100001", "9876543210", "john.doe@example.com");
-    contact2.displayContact();
-} catch (error) {
-    console.error(error.message);
-}
 
 
-
-try {
-    let invalidContact = new Contact("jo", "doe", "12 St", "NY", "NY", "1000", "12345678", "john.doe@com");
-} catch (error) {
-    console.error(error.message);
-}
+// try {
+//     let invalidContact = new Contact("jo", "doe", "12 St", "NY", "NY", "1000", "12345678", "john.doe@com");
+// } catch (error) {
+//     console.error(error.message);
+// }
